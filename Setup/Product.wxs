@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"><?define WixTest_TargetDir=$(var.WixTest.TargetDir)?>
-	<Product Id="*" Name="My Wpf Application" Language="1033" Version="1.0.0.0" Manufacturer="YoungChulShin" UpgradeCode="c0e16149-ab80-421f-9223-ddc96a2aec2b">
+	<Product Id="AA7051DD-C34C-4EBD-97B3-BE6355F89295" Name="My Wpf Application" Language="1033" Version="1.0.0.0" Manufacturer="YoungChulShin" UpgradeCode="c0e16149-ab80-421f-9223-ddc96a2aec2b">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <UIRef Id="WixUI_Minimal"/>
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 		<MediaTemplate />
