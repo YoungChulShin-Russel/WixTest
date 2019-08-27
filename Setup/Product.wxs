@@ -3,10 +3,13 @@
 	<Product Id="AA7051DD-C34C-4EBD-97B3-BE6355F89295" Name="My Wpf Application" Language="1033" Version="1.0.0.0" Manufacturer="YoungChulShin" UpgradeCode="c0e16149-ab80-421f-9223-ddc96a2aec2b">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
-    <UIRef Id="WixUI_Minimal"/>
+    <Property Id="WIXUI_INSTALLDIR" Value="TESTFILEPRODUCTDIR" />
+    <UIRef Id="WixUI_InstallDir"/>
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-		<MediaTemplate />
+    
+    <!--CAB 파일을 설치 파일에 병합-->
+		<MediaTemplate EmbedCab="yes" />
 
 		<Feature Id="ProductFeature" Title="My Wpf Application" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
@@ -18,7 +21,9 @@
 	<Fragment>
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="ProgramFilesFolder">
-				<Directory Id="INSTALLFOLDER" Name="Setup" />
+        <Directory Id="TESTFILEPRODUCTDIR" Name="Test File">
+          <Directory Id="INSTALLFOLDER" Name="Setup" />
+        </Directory>
 			</Directory>
       <Directory Id="ProgramMenuFolder">
         <Directory Id="ApplicationProgramsFolder" Name="My Wpf Application"/>
