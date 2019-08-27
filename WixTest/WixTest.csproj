@@ -95,5 +95,11 @@
   <ItemGroup>
     <Resource Include="icon.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WixTest.Addon\WixTest.Addon.csproj">
+      <Project>{797fbec3-d78c-4907-b460-3fecb317a2d0}</Project>
+      <Name>WixTest.Addon</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

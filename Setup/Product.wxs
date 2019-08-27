@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"><?define WixTest_TargetDir=$(var.WixTest.TargetDir)?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?define WixTest_TargetDir=$(var.WixTest.TargetDir)?>
 	<Product Id="AA7051DD-C34C-4EBD-97B3-BE6355F89295" Name="My Wpf Application" Language="1033" Version="1.0.0.0" Manufacturer="YoungChulShin" UpgradeCode="c0e16149-ab80-421f-9223-ddc96a2aec2b">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
-    <Property Id="WIXUI_INSTALLDIR" Value="TESTFILEPRODUCTDIR" />
-    <UIRef Id="WixUI_InstallDir"/>
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <UIRef Id="WixUI_InstallDir" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
     
@@ -21,14 +22,12 @@
 	<Fragment>
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="ProgramFilesFolder">
-        <Directory Id="TESTFILEPRODUCTDIR" Name="Test File">
-          <Directory Id="INSTALLFOLDER" Name="Setup" />
-        </Directory>
+          <Directory Id="INSTALLFOLDER" Name="MyWpfApplication" />
 			</Directory>
       <Directory Id="ProgramMenuFolder">
-        <Directory Id="ApplicationProgramsFolder" Name="My Wpf Application"/>
+        <Directory Id="ApplicationProgramsFolder" Name="MyWpfApplication" />
       </Directory>
-      <Directory Id="DesktopFolder" Name="Desktop"/>
+      <Directory Id="DesktopFolder" Name="Desktop" />
 		</Directory>
 	</Fragment>
 
@@ -41,20 +40,23 @@
 			<Component Id="WixTest.exe" Guid="ed8c8763-e13b-47a7-8133-6a5e3d42f317">
 			  <File Id="WixTest.exe" Name="WixTest.exe" Source="$(var.WixTest_TargetDir)WixTest.exe" />
 			</Component>
+			<Component Id="WixTest.Addon.dll" Guid="ce6396d5-8b27-44ab-bfa2-ec295fdb798f">
+			  <File Id="WixTest.Addon.dll" Name="WixTest.Addon.dll" Source="$(var.WixTest_TargetDir)WixTest.Addon.dll" />
+			</Component>
 		</ComponentGroup>
 	</Fragment>
 
   <Fragment>
     <DirectoryRef Id="ApplicationProgramsFolder">
       <Component Id="ApplicationShortcut" Guid="9bd13330-6540-406f-a3a8-d7f7c69ae7f9">
-        <Shortcut Id="ApplicationStartMenuShortcut" Name="My Wpf Application" Description="My Wpf Application" Target="[INSTALLFOLDER]WixTest.exe" WorkingDirectory="INSTALLFOLDER" />
+        <Shortcut Id="ApplicationStartMenuShortcut" Name="MyWpfApplication" Description="MyWpfApplication" Target="[INSTALLFOLDER]WixTest.exe" WorkingDirectory="INSTALLFOLDER" />
         <RemoveFolder Id="RemoveApplicationProgramsFolder" Directory="ApplicationProgramsFolder" On="uninstall" />
         <RegistryValue Root="HKCU" Key="Software\MyWpfApplication" Name="installed" Type="integer" Value="1" KeyPath="yes" />
       </Component>
     </DirectoryRef>
     <DirectoryRef Id="DesktopFolder">
       <Component Id="ApplicationShortcutDesktop" Guid="cde1e030-eb64-49a5-b7b8-400b379c2d1a">
-        <Shortcut Id="ApplicationDesktopShortcut" Name="My Wpf Application" Description="My Wpf Application" Target="[INSTALLFOLDER]WixTest.exe" WorkingDirectory="INSTALLFOLDER" />
+        <Shortcut Id="ApplicationDesktopShortcut" Name="MyWpfApplication" Description="MyWpfApplication" Target="[INSTALLFOLDER]WixTest.exe" WorkingDirectory="INSTALLFOLDER" />
         <RemoveFolder Id="RemoveDesktopFolder" Directory="DesktopFolder" On="uninstall" />
         <RegistryValue Root="HKCU" Key="Software\MyWpfApplication" Name="installed" Type="integer" Value="1" KeyPath="yes" />
       </Component>
